@@ -20,10 +20,6 @@ export const SITE_CONFIG = {
     ownerUrl: '#',
     rightsText: 'All rights reserved.',
   },
-  legalLinks: [
-    { label: 'Brand Guidelines', href: '#' },
-    { label: 'Trademark Policy', href: '#' },
-  ] satisfies SiteLink[],
   socialLinks: [
     { label: 'Twitter', href: '#', icon: 'twitter' },
     { label: 'GitHub', href: '#', icon: 'github' },

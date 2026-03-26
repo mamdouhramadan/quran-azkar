@@ -48,29 +48,30 @@ export function AzkarCategoryPage({ slug }: AzkarCategoryPageProps) {
   const router = useRouter();
   const { t, lang } = useTranslation();
   const { toggleFavorite, isFavorite } = useFavorites();
-  const category = azkarCategories.find(c => c.slug === slug);
+  const normalizedSlug = decodeURIComponent(slug).replace(/^\/+|\/+$/g, '').toLowerCase();
+  const category = azkarCategories.find(c => c.slug === normalizedSlug);
 
   const { getRemaining, setRemaining, decrementAt, resetCategory } = useAzkarProgressStore();
-  const remaining = getRemaining(slug) ?? [];
+  const remaining = getRemaining(normalizedSlug) ?? [];
 
   useEffect(() => {
     if (!category) return;
-    const stored = getRemaining(slug);
+    const stored = getRemaining(normalizedSlug);
     if (!stored || stored.length !== category.azkar.length) {
-      setRemaining(slug, category.azkar.map(z => z.count));
+      setRemaining(normalizedSlug, category.azkar.map(z => z.count));
     }
-  }, [slug, category, getRemaining, setRemaining]);
+  }, [normalizedSlug, category, getRemaining, setRemaining]);
 
   // handleCount decrements the remaining counter for one zikr entry.
   const handleCount = useCallback((index: number) => {
     playClickSound();
-    decrementAt(slug, index);
-  }, [slug, decrementAt]);
+    decrementAt(normalizedSlug, index);
+  }, [normalizedSlug, decrementAt]);
 
   // handleReset restores all counters for the active azkar category.
   const handleReset = () => {
     if (!category) return;
-    resetCategory(slug, category.azkar.map(z => z.count));
+    resetCategory(normalizedSlug, category.azkar.map(z => z.count));
   };
 
   // handleCopy copies zikr text without triggering the outer count action.
@@ -92,14 +93,7 @@ export function AzkarCategoryPage({ slug }: AzkarCategoryPageProps) {
   const progress = Math.round(((totalAll - totalRemaining) / totalAll) * 100);
 
   if (!category) {
-    return (
-      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-2xl font-bold mb-4">{t('categoryNotFound')}</p>
-          <button onClick={() => router.push('/')} className="text-primary font-bold">{t('backToHome')}</button>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   return (

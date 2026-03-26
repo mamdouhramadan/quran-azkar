@@ -34,14 +34,6 @@ export const Footer = () => {
           
           {/* Copyrights Stack */}
           <div className="flex flex-col items-center md:items-end gap-3 text-sm text-muted-foreground">
-             <div className="flex items-center gap-4">
-               {APP_BRAND.legalLinks.map((link, index) => (
-                 <div key={link.label} className="flex items-center gap-4">
-                   {index > 0 ? <div className="h-4 w-px bg-primary/20"></div> : null}
-                   <a href={link.href} className="hover:text-foreground hover:font-bold transition-all">{link.label}</a>
-                 </div>
-               ))}
-             </div>
              <p>
                Copyright © {APP_BRAND.copyright.year}{' '}
                <a href={APP_BRAND.copyright.ownerUrl} className="font-bold hover:text-primary transition-colors">
