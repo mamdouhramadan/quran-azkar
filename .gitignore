@@ -1,0 +1,44 @@
+# Logs and runtime output
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies and build output
+node_modules/
+.next/
+dist/
+out/
+coverage/
+.turbo/
+.vercel/
+next-env.d.ts
+*.tsbuildinfo
+
+# Local environment files
+.env
+.env.*
+*.local
+
+# Editor and OS files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Agent and tool artifacts
+.specstory/
+.lovable/
+.cursor/
+
+# Temporary files
+*.tmp
+*.temp
