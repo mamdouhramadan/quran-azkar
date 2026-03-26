@@ -1,7 +1,7 @@
 // Settings defines the persistent user preferences shared across the app.
 export interface Settings {
   language: 'ar' | 'en';
-  theme: 'light' | 'dark' | 'auto';
+  theme: 'light' | 'dark' | 'system' | 'auto';
   city: string;
   reciter: string;
   fontSize: 'small' | 'medium' | 'large';

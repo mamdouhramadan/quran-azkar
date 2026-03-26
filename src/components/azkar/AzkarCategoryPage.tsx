@@ -182,7 +182,7 @@ export function AzkarCategoryPage({ slug }: AzkarCategoryPageProps) {
                   </div>
                   <div className="flex items-center gap-3">
                     {done ? (
-                      <CheckCircle className="text-primary" weight="regular" />
+                      <CheckCircle size={48} className="text-primary" weight="fill" />
                     ) : (
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-muted-foreground hidden sm:inline">{t('pressToCount')}</span>
@@ -201,7 +201,7 @@ export function AzkarCategoryPage({ slug }: AzkarCategoryPageProps) {
         {/* Completion message */}
         {progress === 100 && (
           <div className="mt-8 text-center p-6 rounded-2xl bg-primary/10 border border-primary/20">
-            <Trophy className="text-primary text-5xl mb-2" weight="regular" />
+            <Trophy className="text-primary text-5xl mb-2" weight="fill" />
             <p className="text-lg font-black text-primary">{t('completedAll')}</p>
             <p className="text-sm text-muted-foreground mt-1">{t('acceptedFromYou')}</p>
           </div>

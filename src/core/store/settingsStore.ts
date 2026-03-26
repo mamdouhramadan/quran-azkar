@@ -7,7 +7,7 @@ export const SETTINGS_STORAGE_KEY = 'quran-settings';
 
 export const defaultSettings: Settings = {
   language: 'ar',
-  theme: 'light',
+  theme: 'system',
   city: 'Mecca',
   reciter: 'afasy',
   fontSize: 'medium',

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect } from "react";
 import { fetchPrayerTimes } from "@/core/api/prayerApi";
-import { defaultSettings, useSettings } from "@/core/hooks/useSettings";
+import { useSettings } from "@/core/hooks/useSettings";
 
 const fontSizeMap = {
   small: "14px",
@@ -22,7 +22,7 @@ async function resolveAutoTheme(city: string): Promise<"light" | "dark"> {
 
     return isDark ? "dark" : "light";
   } catch {
-    return defaultSettings.theme === "dark" ? "dark" : "light";
+    return "light";
   }
 }
 
@@ -43,9 +43,17 @@ export function SettingsEffectsProvider({ children }: { children: React.ReactNod
   }, [settings.language, settings.fontSize]);
 
   useEffect(() => {
-    if (settings.theme !== "auto") {
+    if (settings.theme === "light" || settings.theme === "dark") {
       applyResolvedTheme(settings.theme);
       return;
+    }
+
+    if (settings.theme === "system") {
+      const media = window.matchMedia("(prefers-color-scheme: dark)");
+      const applySystem = () => applyResolvedTheme(media.matches ? "dark" : "light");
+      applySystem();
+      media.addEventListener("change", applySystem);
+      return () => media.removeEventListener("change", applySystem);
     }
 
     let isActive = true;
