@@ -27,11 +27,11 @@ export const QuranReader = ({ selection, selectedAyah, onAyahClick }: QuranReade
     const existing = bookmarks.find(b => b.surah === surah && b.ayah === ayah);
     if (existing) {
       removeBookmark(existing.id);
-      toast.success(t('bookmarkRemoved') || 'تم إزالة العلامة المرجعية');
+      toast.success(t('bookmarkRemoved'));
     } else {
-      const surahName = surahData?.surahNameArabic || `سورة ${surah}`;
+      const surahName = surahData?.surahNameArabic || t('surahFallbackName', { number: surah });
       addBookmark({ surah, ayah, surahName, text: ayahText });
-      toast.success(t('bookmarkAdded') || 'تم حفظ العلامة المرجعية');
+      toast.success(t('bookmarkAdded'));
     }
   };
   
@@ -80,10 +80,10 @@ export const QuranReader = ({ selection, selectedAyah, onAyahClick }: QuranReade
           {surahData.surahNameArabic}
         </h2>
         <p className="text-muted-foreground">
-          {settings.language === 'ar' ? 
-            `${surahData.surahNameTranslation} - ${surahData.totalAyah} آيات` :
-            `${surahData.surahNameTranslation} - ${surahData.totalAyah} verses`
-          }
+          {t('surahLineShort', {
+            name: surahData.surahNameTranslation,
+            count: surahData.totalAyah,
+          })}
         </p>
       </div>
 
@@ -107,7 +107,9 @@ export const QuranReader = ({ selection, selectedAyah, onAyahClick }: QuranReade
             )}
             
             <div className="flex justify-between items-center mt-2 text-xs text-muted-foreground">
-              <span>{settings.language === 'ar' ? `سورة ${ayah.surahNumber} آية ${ayah.number}` : `Surah ${ayah.surahNumber} Verse ${ayah.number}`}</span>
+              <span>
+                {t('surahAyahRef', { surah: ayah.surahNumber, ayah: ayah.number })}
+              </span>
               <div className="flex items-center gap-4">
                 <button
                   onClick={(e) => handleBookmark(e, ayah.surahNumber, ayah.number, ayah.text)}

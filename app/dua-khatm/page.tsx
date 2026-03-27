@@ -5,41 +5,42 @@ import { TopBar } from '@/components/TopBar';
 import { useTranslation } from '@/core/hooks/useTranslation';
 import { BookOpen } from '@phosphor-icons/react';
 import { Breadcrumb } from '@/components/Breadcrumb';
+import type { TranslationKey } from '@/core/i18n/translations';
 
-const duas = [
+const duas: { id: number; titleKey: TranslationKey; text: string }[] = [
   {
     id: 1,
-    title: 'دعاء ختم القرآن الكريم',
+    titleKey: 'duaKhatmCard1Title',
     text: 'اللَّهُمَّ ارْحَمْنِي بِالقُرْآنِ وَاجْعَلْهُ لِي إِمَامًا وَنُورًا وَهُدًى وَرَحْمَةً، اللَّهُمَّ ذَكِّرْنِي مِنْهُ مَا نَسِيتُ وَعَلِّمْنِي مِنْهُ مَا جَهِلْتُ وَارْزُقْنِي تِلَاوَتَهُ آنَاءَ اللَّيْلِ وَأَطْرَافَ النَّهَارِ وَاجْعَلْهُ لِي حُجَّةً يَا رَبَّ العَالَمِينَ.',
   },
   {
     id: 2,
-    title: 'دعاء الانتفاع بالقرآن',
+    titleKey: 'duaKhatmCard2Title',
     text: 'اللَّهُمَّ انْفَعْنِي بِمَا عَلَّمْتَنِي، وَعَلِّمْنِي مَا يَنْفَعُنِي، وَزِدْنِي عِلْمًا، الحَمْدُ لِلَّهِ عَلَى كُلِّ حَالٍ، وَأَعُوذُ بِاللَّهِ مِنْ حَالِ أَهْلِ النَّارِ.',
   },
   {
     id: 3,
-    title: 'دعاء جعل القرآن ربيع القلب',
+    titleKey: 'duaKhatmCard3Title',
     text: 'اللَّهُمَّ اجْعَلِ القُرْآنَ رَبِيعَ قَلْبِي، وَنُورَ صَدْرِي، وَجَلَاءَ حُزْنِي، وَذَهَابَ هَمِّي وَغَمِّي.',
   },
   {
     id: 4,
-    title: 'دعاء حفظ القرآن والعمل به',
+    titleKey: 'duaKhatmCard4Title',
     text: 'اللَّهُمَّ اجْعَلْنِي مِمَّنْ يَقْرَأُ القُرْآنَ فَيَرْقَى، وَلَا تَجْعَلْنِي مِمَّنْ يَقْرَأُ القُرْآنَ فَيُشْقَى، اللَّهُمَّ اجْعَلِ القُرْآنَ شَافِعًا لَنَا، وَاجْعَلْهُ لَنَا نُورًا وَهُدًى وَرَحْمَةً.',
   },
   {
     id: 5,
-    title: 'دعاء الشفاعة بالقرآن',
+    titleKey: 'duaKhatmCard5Title',
     text: 'اللَّهُمَّ اجْعَلِ القُرْآنَ العَظِيمَ شَفِيعًا لَنَا يَوْمَ القِيَامَةِ، وَاجْعَلْهُ لَنَا سَائِقًا إِلَى الجَنَّةِ، وَاجْعَلْهُ لَنَا حِرْزًا مِنَ النَّارِ.',
   },
   {
     id: 6,
-    title: 'دعاء رفع الدرجات بالقرآن',
+    titleKey: 'duaKhatmCard6Title',
     text: 'اللَّهُمَّ ارْفَعْ دَرَجَاتِنَا بِالقُرْآنِ، وَأَنْقِذْنَا بِهِ مِنَ النَّارِ، وَأَدْخِلْنَا بِهِ الجَنَّةَ، اللَّهُمَّ اجْعَلِ القُرْآنَ لَنَا فِي الدُّنْيَا قَرِينًا وَفِي القَبْرِ مُونِسًا وَعَلَى الصِّرَاطِ نُورًا.',
   },
   {
     id: 7,
-    title: 'دعاء ختم عام',
+    titleKey: 'duaKhatmCard7Title',
     text: 'صَدَقَ اللَّهُ العَظِيمُ، اللَّهُمَّ لَكَ الحَمْدُ كَمَا يَنْبَغِي لِجَلَالِ وَجْهِكَ وَعَظِيمِ سُلْطَانِكَ، اللَّهُمَّ تَقَبَّلْ مِنَّا خَتْمَ القُرْآنِ، وَاجْعَلْهُ خَالِصًا لِوَجْهِكَ الكَرِيمِ، وَاغْفِرْ لَنَا مَا أَخْطَأْنَا فِيهِ وَمَا قَصَّرْنَا.',
   },
 ];
@@ -82,7 +83,7 @@ export default function DuaKhatmPage() {
                 <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-black text-sm">
                   {dua.id}
                 </div>
-                <h3 className="text-base font-bold">{dua.title}</h3>
+                <h3 className="text-base font-bold">{t(dua.titleKey)}</h3>
               </div>
               <p className="text-lg leading-loose font-arabic text-foreground" style={{ fontFamily: "'Amiri', 'Traditional Arabic', serif" }}>
                 {dua.text}

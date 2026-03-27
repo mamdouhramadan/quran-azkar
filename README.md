@@ -18,21 +18,50 @@ A modern Islamic companion app with Quran reading, audio recitation, prayer time
 
 ## 📸 App Screenshots
 
-### Home
+Reference captures of the UI in **light** and **dark** themes (two columns).
 
-<img src="./screenshots/home.jpg" alt="Home screen" width="100%" />
-
-### Quran Overview
-
-<img src="./screenshots/quran.jpg" alt="Quran overview screen" width="360" />
-
-### Quran Reader
-
-<img src="./screenshots/quran-reader.jpg" alt="Quran reader screen" width="100%" />
-
-### Settings
-
-<img src="./screenshots/settings.jpg" alt="Settings screen" width="100%" />
+<table>
+  <tr>
+    <td width="50%" align="center"><strong>Home — light</strong></td>
+    <td width="50%" align="center"><strong>Home — dark</strong></td>
+  </tr>
+  <tr>
+    <td><img src="./screenshots/home.png" alt="Home screen light theme" width="100%" /></td>
+    <td><img src="./screenshots/home-dark.png" alt="Home screen dark theme" width="100%" /></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><strong>Quran — light</strong></td>
+    <td width="50%" align="center"><strong>Quran — dark</strong></td>
+  </tr>
+  <tr>
+    <td><img src="./screenshots/quran.png" alt="Quran library light theme" width="100%" /></td>
+    <td><img src="./screenshots/quran-dark.png" alt="Quran library dark theme" width="100%" /></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><strong>Azkar — light</strong></td>
+    <td width="50%" align="center"><strong>Azkar — dark</strong></td>
+  </tr>
+  <tr>
+    <td><img src="./screenshots/azkar.png" alt="Azkar category light theme" width="100%" /></td>
+    <td><img src="./screenshots/azkar-dark.png" alt="Azkar category dark theme" width="100%" /></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><strong>Digital Tasbih — light</strong></td>
+    <td width="50%" align="center"><strong>Digital Tasbih — dark</strong></td>
+  </tr>
+  <tr>
+    <td><img src="./screenshots/tasbih.png" alt="Digital Tasbih light theme" width="100%" /></td>
+    <td><img src="./screenshots/tasbih-dark.png" alt="Digital Tasbih dark theme" width="100%" /></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><strong>Settings — light</strong></td>
+    <td width="50%" align="center"><strong>Settings — dark</strong></td>
+  </tr>
+  <tr>
+    <td><img src="./screenshots/settings.png" alt="Settings light theme" width="100%" /></td>
+    <td><img src="./screenshots/settings-dark.png" alt="Settings dark theme" width="100%" /></td>
+  </tr>
+</table>
 
 ---
 

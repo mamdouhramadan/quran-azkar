@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, type UIEvent } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchQuranContent } from '@/core/api/quranApi';
 import { useSettings } from '@/core/hooks/useSettings';
+import { useTranslation } from '@/core/hooks/useTranslation';
 import type { QuranAyah, QuranSelectionType, SurahData } from '@/core/types';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -17,6 +18,7 @@ export const InfiniteQuranReader = ({
   onAyahClick 
 }: InfiniteQuranReaderProps) => {
   const { settings } = useSettings();
+  const { t } = useTranslation();
   const [loadedSurahs, setLoadedSurahs] = useState<SurahData[]>([]);
 
   const {
@@ -70,7 +72,7 @@ export const InfiniteQuranReader = ({
   if (error) {
     return (
       <div className="p-6 text-center text-muted-foreground">
-        {settings.language === 'ar' ? 'فشل في تحميل محتوى القرآن' : 'Failed to load Quran content'}
+        {t('failedToLoadQuran')}
       </div>
     );
   }
@@ -97,10 +99,10 @@ export const InfiniteQuranReader = ({
                 {surahData.surahNameArabic}
               </h2>
               <p className="text-muted-foreground">
-                {settings.language === 'ar' ? 
-                  `سورة ${surahData.surahNameTranslation} - ${surahData.totalAyah} آيات` :
-                  `Surah ${surahData.surahNameTranslation} - ${surahData.totalAyah} verses`
-                }
+                {t('surahLineWithPrefix', {
+                  name: surahData.surahNameTranslation,
+                  count: surahData.totalAyah,
+                })}
               </p>
             </div>
 
@@ -125,10 +127,10 @@ export const InfiniteQuranReader = ({
                   
                   <div className="flex justify-between items-center mt-2 text-xs text-muted-foreground">
                     <span>
-                      {settings.language === 'ar' ? 
-                        `سورة ${surahData.surahNameTranslation} - آية ${index + 1}` : 
-                        `Surah ${surahData.surahNameTranslation} - Verse ${index + 1}`
-                      }
+                      {t('surahAyahLine', {
+                        name: surahData.surahNameTranslation,
+                        ayah: index + 1,
+                      })}
                     </span>
                   </div>
                 </div>
@@ -150,9 +152,7 @@ export const InfiniteQuranReader = ({
 
         {!hasNextPage && (
           <div className="p-6 text-center text-muted-foreground">
-            <p className={fontSizeClass}>
-              {settings.language === 'ar' ? 'انتهى القرآن الكريم' : 'End of the Holy Quran'}
-            </p>
+            <p className={fontSizeClass}>{t('endOfQuran')}</p>
           </div>
         )}
       </div>

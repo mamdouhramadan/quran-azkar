@@ -68,7 +68,8 @@ export const TopBar = ({
   onBackClick,
 }: TopBarProps) => {
   const { settings, updateSettings } = useSettings();
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
+  const brandFont = lang === 'ar' ? 'font-brand-ar' : 'font-brand-en';
   const router = useRouter();
   const pathname = usePathname();
   const { openSettings } = useShell();
@@ -96,11 +97,19 @@ export const TopBar = ({
             {settings.language === 'ar' ? <ArrowRight size={24} weight="bold" /> : <ArrowLeft size={24} weight="bold" />}
           </button>
         )}
-        <Link href="/" aria-label={APP_BRAND.siteName} className="text-primary flex min-w-0 items-center gap-2">
+        <Link href="/" aria-label={t('brandWordmark')} className="text-primary flex min-w-0 items-center gap-2">
           <APP_BRAND.LogoIcon size={35} weight="fill" className="shrink-0" />
           <div className="hidden sm:flex flex-col leading-none min-w-0">
-            <span className="font-bold text-xl truncate">{APP_BRAND.shortName}</span>
-            <span className="text-[11px] text-muted-foreground font-medium truncate">{APP_BRAND.headerTagline}</span>
+            <span
+              className={cn(
+                brandFont,
+                'truncate text-xl font-bold tracking-tight sm:text-[1.35rem]',
+                lang === 'ar' && 'leading-tight'
+              )}
+            >
+              {t('brandWordmark')}
+            </span>
+            <span className="mt-0.5 truncate text-[11px] font-medium text-muted-foreground">{t('brandTagline')}</span>
           </div>
         </Link>
       </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Amiri_Quran } from "next/font/google";
+import { Amiri_Quran, Reem_Kufi, Cinzel } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "@/components/AppShell";
 import { SITE_CONFIG } from "@/config/siteConfig";
@@ -9,6 +9,21 @@ const amiriQuran = Amiri_Quran({
   weight: "400",
   subsets: ["arabic"],
   variable: "--font-amiri-quran",
+});
+
+// Reem Kufi: geometric Arabic wordmark; Cinzel: classical Latin wordmark for the brand.
+const fontBrandAr = Reem_Kufi({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-brand-ar",
+  display: "swap",
+});
+
+const fontBrandEn = Cinzel({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-brand-en",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +49,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
-      <body className={`${amiriQuran.variable}`}>
+      <body className={`${amiriQuran.variable} ${fontBrandAr.variable} ${fontBrandEn.variable}`}>
         <Providers>
           <AppShell>{children}</AppShell>
         </Providers>

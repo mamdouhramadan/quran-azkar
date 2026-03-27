@@ -27,7 +27,7 @@ export default function BookmarksPage() {
     const name = window.prompt(t('folderName'));
     if (name && name.trim()) {
       createFolder(name.trim());
-      toast.success(t('folderName') + ' ✓');
+      toast.success(t('folderCreated'));
     }
   };
 
@@ -106,7 +106,7 @@ export default function BookmarksPage() {
               {activeFolderId === folder.id && (
                 <button
                   onClick={() => {
-                    if (window.confirm('Delete this folder? Bookmarks inside it will not be deleted.')) {
+                    if (window.confirm(t('deleteFolderConfirm'))) {
                       deleteFolder(folder.id);
                       setActiveFolderId(null);
                     }
@@ -142,7 +142,9 @@ export default function BookmarksPage() {
                     </div>
                     <div>
                       <p className="font-bold text-sm">{bookmark.surahName}</p>
-                      <p className="text-xs text-muted-foreground">آية {bookmark.ayah}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {t('searchMetaAyah', { ayah: bookmark.ayah })}
+                      </p>
                     </div>
                   </div>
                   <DropdownMenu>
@@ -152,12 +154,12 @@ export default function BookmarksPage() {
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem onClick={() => moveToFolder(bookmark.id, undefined)}>
                         <BookmarkSimple className="mr-2 h-4 w-4" />
-                        <span>Remove from Folder</span>
+                        <span>{t('removeFromFolder')}</span>
                       </DropdownMenuItem>
                       {folders.map(f => (
                         <DropdownMenuItem key={f.id} onClick={() => moveToFolder(bookmark.id, f.id)}>
                           <Folder className="mr-2 h-4 w-4" />
-                          <span>Move to {f.name}</span>
+                          <span>{t('moveToFolderNamed', { name: f.name })}</span>
                         </DropdownMenuItem>
                       ))}
                     </DropdownMenuContent>

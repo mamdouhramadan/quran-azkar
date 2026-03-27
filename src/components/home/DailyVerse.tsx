@@ -10,7 +10,7 @@ export const DailyVerse = () => {
       <p className="text-xl md:text-2xl font-medium leading-relaxed mb-6 font-arabic" dir="rtl">
         "وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى الْخَاشِعِينَ"
       </p>
-      <p className="text-primary font-bold text-sm">سورة البقرة • آية ٤٥</p>
+      <p className="text-primary font-bold text-sm">{t('dailyVerseMeta')}</p>
     </section>
   );
 };

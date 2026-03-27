@@ -83,13 +83,13 @@ export default function FavoritesPage() {
                     className="flex items-center gap-1.5 rounded-full bg-destructive/10 px-3 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/20 transition-colors"
                   >
                     <Heart className="text-sm" weight="fill" />
-                    إزالة
+                    {t('remove')}
                   </button>
                   <div className="flex-1" />
                   <button
                     onClick={() => handleCopy(text)}
                     className="flex size-9 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                    title={t('copied')}
+                    title={t('copy')}
                   >
                     <Copy className="text-lg" weight="regular" />
                   </button>

@@ -9,14 +9,14 @@ export interface SocialConfigLink extends SiteLink {
 
 // SITE_CONFIG keeps site-wide editable brand copy and urls in one server-safe place.
 export const SITE_CONFIG = {
-  siteName: 'quran kareem',
-  shortName: 'quran kareem',
-  headerTagline: 'Quran, Azkar, and prayer times',
+  siteName: 'Quran Kareem',
+  shortName: 'Quran Kareem',
+  headerTagline: 'Quran, Azkar, prayer times & tasbih in one place',
   description:
-    'Quran Kareem with Azkar, prayer times, and tasbih in one calm spiritual companion.',
+    'Holy Quran with Azkar, prayer times, and digital tasbih — a calm spiritual companion for your reading and dhikr.',
   copyright: {
     year: 2026,
-    ownerName: 'quran kareem',
+    ownerName: 'Quran Kareem',
     ownerUrl: '#',
     rightsText: 'All rights reserved.',
   },

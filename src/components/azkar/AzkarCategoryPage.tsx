@@ -78,7 +78,7 @@ export function AzkarCategoryPage({ slug }: AzkarCategoryPageProps) {
   const handleCopy = (text: string, e: React.MouseEvent) => {
     e.stopPropagation();
     navigator.clipboard.writeText(text);
-    toast.success('تم النسخ');
+    toast.success(t('copied'));
   };
 
   // handleShareWhatsApp shares zikr text without triggering the outer count action.
@@ -108,7 +108,7 @@ export function AzkarCategoryPage({ slug }: AzkarCategoryPageProps) {
       <main className="container py-8">
         <div className="flex items-center justify-between mb-8 w-full border-b border-border pb-4">
           <h1 className="text-xl font-bold tracking-tight">{t(category.titleKey)}</h1>
-          <Breadcrumb items={[{ label: 'الأذكار', href: '/' }, { label: t(category.titleKey) }]} />
+          <Breadcrumb items={[{ label: t('azkar'), href: '/' }, { label: t(category.titleKey) }]} />
         </div>
 
         {/* Header */}
@@ -161,21 +161,21 @@ export function AzkarCategoryPage({ slug }: AzkarCategoryPageProps) {
                     <button
                       onClick={(e) => { e.stopPropagation(); toggleFavorite(zikr.text); }}
                       className="flex size-8 items-center justify-center rounded-full bg-muted transition-colors"
-                      title="تفضيل"
+                      title={t('favorite')}
                     >
                       <Heart className={`text-base ${isFavorite(zikr.text) ? 'text-red-500' : 'text-muted-foreground'}`} weight={isFavorite(zikr.text) ? 'fill' : 'regular'} />
                     </button>
                     <button
                       onClick={(e) => handleCopy(zikr.text, e)}
                       className="flex size-8 items-center justify-center rounded-full bg-muted text-muted-foreground hover:text-foreground transition-colors"
-                      title="نسخ"
+                      title={t('copy')}
                     >
                       <Copy className="text-base" weight="regular" />
                     </button>
                     <button
                       onClick={(e) => handleShareWhatsApp(zikr.text, e)}
                       className="flex size-8 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 transition-colors"
-                      title="مشاركة عبر واتساب"
+                      title={t('shareWhatsApp')}
                     >
                       <ShareNetwork className="text-base" weight="regular" />
                     </button>

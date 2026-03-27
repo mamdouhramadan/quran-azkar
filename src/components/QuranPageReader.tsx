@@ -17,7 +17,7 @@ interface QuranPageReaderProps {
 
 export const QuranPageReader = ({ selection, selectedAyah, onAyahClick }: QuranPageReaderProps) => {
   const { settings } = useSettings();
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const ayahRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const { data: surahData, isLoading, error } = useQuery({
@@ -52,11 +52,11 @@ export const QuranPageReader = ({ selection, selectedAyah, onAyahClick }: QuranP
     const existing = bookmarks.find(b => b.surah === surah && b.ayah === ayah);
     if (existing) {
       removeBookmark(existing.id);
-      toast.success('تم إزالة العلامة المرجعية');
+      toast.success(t('bookmarkRemoved'));
     } else {
-      const surahName = surahData?.surahNameArabic || `سورة ${surah}`;
+      const surahName = surahData?.surahNameArabic || t('surahFallbackName', { number: surah });
       addBookmark({ surah, ayah, surahName, text: ayahText });
-      toast.success('تم حفظ العلامة المرجعية');
+      toast.success(t('bookmarkAdded'));
     }
   };
 
@@ -64,7 +64,7 @@ export const QuranPageReader = ({ selection, selectedAyah, onAyahClick }: QuranP
   const handleCopyAyah = (e: React.MouseEvent, text: string) => {
     e.stopPropagation();
     navigator.clipboard.writeText(text);
-    toast.success('تم النسخ');
+    toast.success(t('copied'));
   };
 
   const pageTitle = surahData?.surahNameArabic || '';
@@ -106,11 +106,13 @@ export const QuranPageReader = ({ selection, selectedAyah, onAyahClick }: QuranP
         {selection?.type === 'surah' && selection.id !== 9 && (
           <div className="py-8 text-center">
             <h1 className={`text-primary font-arabic ${arabicSizeClass} !leading-loose mb-4`}>
-              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+              {t('bismillah')}
             </h1>
-            <p className="text-muted-foreground italic text-sm">
-              In the name of Allah, the Entirely Merciful, the Especially Merciful.
-            </p>
+            {lang === 'en' && (
+              <p className="text-muted-foreground italic text-sm">
+                {t('bismillahTranslationEn')}
+              </p>
+            )}
           </div>
         )}
 

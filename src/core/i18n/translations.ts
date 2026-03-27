@@ -10,6 +10,14 @@ const ar = {
   // Header
   appName: 'القرآن',
 
+  // Brand (logo wordmark, tagline, footer — use with brand-ar / brand-en fonts)
+  brandWordmark: 'القرآن الكريم',
+  brandTagline: 'القرآن والأذكار ومواقيت الصلاة والمسبحة',
+  brandDescription:
+    'القرآن الكريم مع الأذكار ومواقيت الصلاة والمسبحة الإلكترونية — رفيق روحي هادئ لقراءتك وذكرك.',
+  brandCopyrightOwner: 'القرآن الكريم',
+  footerRights: 'جميع الحقوق محفوظة',
+
   // Prayer
   nextPrayer: 'الصلاة القادمة',
   timeRemaining: 'الوقت المتبقي',
@@ -80,6 +88,8 @@ const ar = {
   failedToLoad: 'فشل في تحميل محتوى السورة',
   surahList: 'السور',
   surahCount: 'سورة',
+  quranLibraryTitle: 'القرآن الكريم',
+  quranLibrarySubtitle: 'تصفح السور والأجزاء والأحزاب وابدأ القراءة',
   searchSurah: 'بحث عن سورة...',
   noResults: 'لا توجد نتائج لـ',
   pressToCount: 'اضغط للتسبيح',
@@ -137,6 +147,10 @@ const ar = {
   share: 'مشاركة',
   shareWhatsApp: 'مشاركة عبر واتساب',
   favorite: 'تفضيل',
+  remove: 'إزالة',
+
+  // Azkar (breadcrumb)
+  azkar: 'الأذكار',
 
   // Footer
   footerText: 'مشروع القرآن الكريم الرقمي ٢٠٢٤',
@@ -146,6 +160,13 @@ const ar = {
   // Dua Khatm
   duaKhatmTitle: 'دعاء ختم القرآن',
   duaKhatmDesc: 'أدعية مأثورة عند ختم القرآن الكريم',
+  duaKhatmCard1Title: 'دعاء ختم القرآن الكريم',
+  duaKhatmCard2Title: 'دعاء الانتفاع بالقرآن',
+  duaKhatmCard3Title: 'دعاء جعل القرآن ربيع القلب',
+  duaKhatmCard4Title: 'دعاء حفظ القرآن والعمل به',
+  duaKhatmCard5Title: 'دعاء الشفاعة بالقرآن',
+  duaKhatmCard6Title: 'دعاء رفع الدرجات بالقرآن',
+  duaKhatmCard7Title: 'دعاء ختم عام',
 
   // Search
   search: 'بحث',
@@ -188,6 +209,11 @@ const ar = {
   bookmarkAdded: 'تم حفظ العلامة المرجعية',
   bookmarkRemoved: 'تم إزالة العلامة المرجعية',
   noBookmarks: 'لا توجد علامات مرجعية حتى الآن',
+  deleteFolderConfirm:
+    'هل تريد حذف هذا المجلد؟ لن تُحذف العلامات المرجعية من القرآن.',
+  removeFromFolder: 'إزالة من المجلد',
+  moveToFolderNamed: 'نقل إلى {{name}}',
+  folderCreated: 'تم إنشاء المجلد',
   
   // Juz & Hizb
   juz: 'الجزء',
@@ -201,6 +227,19 @@ const ar = {
   surahView: 'السور',
   pageNumber: 'صفحة {{number}}',
   goToPage: 'انتقال لصفحة',
+
+  // Quran reader & audio
+  failedToLoadQuran: 'فشل في تحميل محتوى القرآن',
+  surahLineShort: '{{name}} - {{count}} آيات',
+  surahLineWithPrefix: 'سورة {{name}} - {{count}} آيات',
+  surahAyahLine: 'سورة {{name}} - آية {{ayah}}',
+  surahAyahRef: 'سورة {{surah}} آية {{ayah}}',
+  endOfQuran: 'انتهى القرآن الكريم',
+  audioVerseOfTotal: 'آية {{current}} من {{total}}',
+  surahFallbackName: 'سورة {{number}}',
+  dailyVerseMeta: 'سورة البقرة • آية ٤٥',
+  bismillahTranslationEn:
+    'In the name of Allah, the Entirely Merciful, the Especially Merciful.',
 };
 
 const en: typeof ar = {
@@ -212,6 +251,13 @@ const en: typeof ar = {
   back: 'Back',
 
   appName: 'Quran',
+
+  brandWordmark: 'Quran Kareem',
+  brandTagline: 'Quran, Azkar, prayer times & tasbih in one place',
+  brandDescription:
+    'Holy Quran with Azkar, prayer times, and digital tasbih — a calm spiritual companion for your reading and dhikr.',
+  brandCopyrightOwner: 'Quran Kareem',
+  footerRights: 'All rights reserved',
 
   nextPrayer: 'Next Prayer',
   timeRemaining: 'Time Remaining',
@@ -276,6 +322,8 @@ const en: typeof ar = {
   failedToLoad: 'Failed to load surah content',
   surahList: 'Surahs',
   surahCount: 'surahs',
+  quranLibraryTitle: 'The Holy Quran',
+  quranLibrarySubtitle: 'Browse surahs, juz, and hizb — start reading',
   searchSurah: 'Search for a surah...',
   noResults: 'No results for',
   pressToCount: 'Tap to count',
@@ -328,6 +376,9 @@ const en: typeof ar = {
   share: 'Share',
   shareWhatsApp: 'Share via WhatsApp',
   favorite: 'Favorite',
+  remove: 'Remove',
+
+  azkar: 'Azkar',
 
   footerText: 'Digital Quran Project 2024',
   retry: 'Retry',
@@ -335,6 +386,13 @@ const en: typeof ar = {
 
   duaKhatmTitle: 'Dua Khatm Al-Quran',
   duaKhatmDesc: 'Supplications upon completing the Holy Quran',
+  duaKhatmCard1Title: 'Dua upon completing the Holy Quran',
+  duaKhatmCard2Title: 'Dua for benefitting from the Quran',
+  duaKhatmCard3Title: 'Dua for making the Quran the spring of the heart',
+  duaKhatmCard4Title: 'Dua for memorizing the Quran and acting upon it',
+  duaKhatmCard5Title: 'Dua for intercession through the Quran',
+  duaKhatmCard6Title: 'Dua for raising ranks through the Quran',
+  duaKhatmCard7Title: 'General khatm dua',
 
   // Search
   search: 'Search',
@@ -377,7 +435,12 @@ const en: typeof ar = {
   bookmarkAdded: 'Bookmark Saved',
   bookmarkRemoved: 'Bookmark Removed',
   noBookmarks: 'No bookmarks yet',
-  
+  deleteFolderConfirm:
+    'Delete this folder? Bookmarks inside it will not be removed from the Quran.',
+  removeFromFolder: 'Remove from folder',
+  moveToFolderNamed: 'Move to {{name}}',
+  folderCreated: 'Folder created',
+
   // Juz & Hizb
   juz: 'Juz',
   hizb: 'Hizb',
@@ -390,6 +453,18 @@ const en: typeof ar = {
   surahView: 'Surah View',
   pageNumber: 'Page {{number}}',
   goToPage: 'Go to Page',
+
+  failedToLoadQuran: 'Failed to load Quran content',
+  surahLineShort: '{{name}} - {{count}} verses',
+  surahLineWithPrefix: 'Surah {{name}} - {{count}} verses',
+  surahAyahLine: 'Surah {{name}} - Verse {{ayah}}',
+  surahAyahRef: 'Surah {{surah}} Verse {{ayah}}',
+  endOfQuran: 'End of the Holy Quran',
+  audioVerseOfTotal: 'Verse {{current}} of {{total}}',
+  surahFallbackName: 'Surah {{number}}',
+  dailyVerseMeta: 'Surah Al-Baqarah • Verse 45',
+  bismillahTranslationEn:
+    'In the name of Allah, the Entirely Merciful, the Especially Merciful.',
 };
 
 export const translations = { ar, en };

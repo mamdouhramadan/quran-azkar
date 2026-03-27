@@ -20,6 +20,8 @@ export default {
 		extend: {
 			fontFamily: {
 				arabic: ['var(--font-amiri-quran)', 'serif'],
+				'brand-ar': ['var(--font-brand-ar)', 'serif'],
+				'brand-en': ['var(--font-brand-en)', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

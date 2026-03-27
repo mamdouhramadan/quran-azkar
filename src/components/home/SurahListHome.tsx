@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from '@/core/hooks/useTranslation';
-import { MagnifyingGlass, CaretLeft, BookOpen } from '@phosphor-icons/react';
+import { MagnifyingGlass, CaretRight, BookOpen, Sparkle } from '@phosphor-icons/react';
+import { cn } from '@/core/utils/cn';
 import type { SurahData } from '@/core/types';
 
 interface SurahListHomeProps {
@@ -11,10 +12,13 @@ interface SurahListHomeProps {
   onSurahClick: (surahNumber: number) => void;
 }
 
-// toArabicNumeral renders Latin digits using Arabic numeral glyphs.
 const toArabicNumeral = (num: number): string => {
   const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-  return num.toString().split('').map(d => arabicDigits[parseInt(d)]).join('');
+  return num
+    .toString()
+    .split('')
+    .map((d) => arabicDigits[parseInt(d, 10)])
+    .join('');
 };
 
 // SurahListHome renders the searchable surah grid used on the Quran landing page.
@@ -25,103 +29,136 @@ export const SurahListHome = ({ surahs, onSurahClick }: SurahListHomeProps) => {
 
   if (!surahs) {
     return (
-      <section className="mb-12">
-        <div className="animate-pulse space-y-4">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="h-20 bg-card rounded-2xl" />
+      <section className="mb-8">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {[...Array(9)].map((_, i) => (
+            <div
+              key={i}
+              className="h-28 animate-pulse rounded-2xl bg-gradient-to-br from-muted/80 to-muted/40 ring-1 ring-border/40"
+            />
           ))}
         </div>
       </section>
     );
   }
 
-  const filtered = surahs.filter((surah: SurahData, index: number) => {
+  const filtered = surahs.filter((surah: SurahData) => {
     if (!search) return true;
     const q = search.toLowerCase();
+    const n = String(surah.surahNumber);
     return (
       surah.surahNameArabic?.includes(search) ||
       surah.surahNameTranslation?.toLowerCase().includes(q) ||
       surah.surahNameEnglish?.toLowerCase().includes(q) ||
-      (index + 1).toString().includes(q)
+      n.includes(q)
     );
   });
 
   return (
-    <section className="mb-12">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-black tracking-tight">{t('surahList')}</h2>
-        <span className="text-muted-foreground text-sm font-medium">{surahs.length} {t('surahCount')}</span>
-      </div>
-
-      <div className="mb-6">
-        <div className="flex w-full items-stretch rounded-2xl h-12 bg-card border border-primary/10">
-          <div className="text-muted-foreground flex items-center justify-center px-4">
-            <MagnifyingGlass className="text-xl" weight="regular" />
-          </div>
-          <input
-            className="flex w-full min-w-0 flex-1 border-none bg-transparent focus:outline-none focus:ring-0 text-sm placeholder:text-muted-foreground"
-            placeholder={t('searchSurah')}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+    <section className="mb-8">
+      <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 className="text-xl font-black tracking-tight sm:text-2xl">{t('surahList')}</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {surahs.length} {t('surahCount')}
+          </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="relative mb-8">
+        <MagnifyingGlass
+          className="pointer-events-none absolute start-4 top-1/2 z-10 -translate-y-1/2 text-lg text-muted-foreground"
+          weight="regular"
+          aria-hidden
+        />
+        <input
+          className={cn(
+            'h-14 w-full rounded-2xl border border-border/80 bg-card/80 pe-4 ps-12 text-sm shadow-sm',
+            'placeholder:text-muted-foreground/80',
+            'transition-all focus:border-primary/40 focus:bg-card focus:outline-none focus:ring-2 focus:ring-primary/20'
+          )}
+          placeholder={t('searchSurah')}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          type="search"
+          autoComplete="off"
+          dir="auto"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((surah: SurahData) => {
-          const surahNumber = surahs.indexOf(surah) + 1;
+          const num = surah.surahNumber;
+          const numDisplay = lang === 'ar' ? toArabicNumeral(num) : num;
           return (
-            <div
-              key={surahNumber}
-              onClick={() => onSurahClick(surahNumber)}
-              className="group relative flex items-center justify-between p-5 bg-card rounded-2xl overflow-hidden cursor-pointer hover:ring-2 ring-primary transition-all border border-primary/10"
+            <button
+              key={num}
+              type="button"
+              onClick={() => onSurahClick(num)}
+              className={cn(
+                'group relative flex w-full items-center gap-4 overflow-hidden rounded-2xl border border-border/70 bg-card p-4 text-start shadow-sm',
+                'transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-lg hover:shadow-primary/5',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35'
+              )}
             >
-              <div className="flex items-center gap-5">
-                <div className="size-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-black text-lg">
-                  {lang === 'ar' ? toArabicNumeral(surahNumber) : surahNumber}
-                </div>
-                <div>
-                  <h3 className="text-lg font-black">{surah.surahNameArabic}</h3>
-                  <p className="text-muted-foreground text-sm">
-                    {surah.totalAyah} {t('verses')} • {surah.surahNameTranslation}
-                  </p>
-                </div>
+              <div className="relative flex size-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 font-black text-primary ring-1 ring-primary/15">
+                <span className="text-lg tabular-nums">{numDisplay}</span>
               </div>
-              <div className="flex flex-col items-end gap-2">
-                <span className="text-muted-foreground/20 font-black text-3xl uppercase opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
-                  {surah.surahNameEnglish}
-                </span>
-                <CaretLeft className="text-primary" weight="regular" />
+              <div className="min-w-0 flex-1">
+                <p className="font-arabic text-lg font-bold leading-snug text-foreground" dir="rtl">
+                  {surah.surahNameArabic}
+                </p>
+                <p className="mt-0.5 truncate text-xs font-medium text-muted-foreground sm:text-sm">
+                  {surah.surahNameTranslation || surah.surahNameEnglish}
+                </p>
+                <p className="mt-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-primary/80">
+                  <Sparkle className="size-3.5" weight="fill" aria-hidden />
+                  {surah.totalAyah} {t('verses')}
+                </p>
               </div>
-            </div>
+              <CaretRight
+                className="size-5 shrink-0 text-muted-foreground/50 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-primary rtl:rotate-180"
+                weight="bold"
+                aria-hidden
+              />
+            </button>
           );
         })}
       </div>
 
-      {/* Dua Khatm Al-Quran card */}
-      {(!search || t('duaKhatmTitle').includes(search) || 'دعاء ختم القرآن'.includes(search)) && (
-        <div className="mt-4">
-          <div
-            onClick={() => router.push('/dua-khatm')}
-            className="group relative flex items-center justify-between p-5 bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl overflow-hidden cursor-pointer hover:ring-2 ring-primary transition-all border border-primary/20"
+      {(!search ||
+        t('duaKhatmTitle').toLowerCase().includes(search.toLowerCase()) ||
+        'دعاء ختم القرآن'.includes(search)) && (
+        <div className="mt-6">
+          <button
+            type="button"
+            onClick={() => router.push('/dua-khatm/')}
+            className={cn(
+              'group flex w-full items-center gap-4 overflow-hidden rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/12 via-primary/5 to-transparent p-4 text-start shadow-sm',
+              'transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30'
+            )}
           >
-            <div className="flex items-center gap-5">
-              <div className="size-14 rounded-2xl bg-primary/20 flex items-center justify-center text-primary">
-                <BookOpen className="text-3xl" weight="regular" />
-              </div>
-              <div>
-                <h3 className="text-lg font-black">{t('duaKhatmTitle')}</h3>
-                <p className="text-muted-foreground text-sm">{t('duaKhatmDesc')}</p>
-              </div>
+            <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-primary/20 text-primary ring-1 ring-primary/25">
+              <BookOpen className="text-3xl" weight="fill" />
             </div>
-            <CaretLeft className="text-primary" weight="regular" />
-          </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-base font-black sm:text-lg">{t('duaKhatmTitle')}</h3>
+              <p className="text-sm text-muted-foreground">{t('duaKhatmDesc')}</p>
+            </div>
+            <CaretRight
+              className="size-5 shrink-0 text-primary transition-transform group-hover:translate-x-0.5 rtl:rotate-180"
+              weight="bold"
+              aria-hidden
+            />
+          </button>
         </div>
       )}
 
       {filtered.length === 0 && (
-        <div className="text-center py-12 text-muted-foreground">
-          {t('noResults')} "{search}"
+        <div className="rounded-2xl border border-dashed border-border bg-muted/30 py-14 text-center">
+          <p className="text-muted-foreground">
+            {t('noResults')} &ldquo;{search}&rdquo;
+          </p>
         </div>
       )}
     </section>

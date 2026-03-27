@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchSurahContent } from '@/core/api/quranApi';
 import { fetchReciterAudioByChapter } from '@/core/api/reciterApi';
 import { useSettings } from '@/core/hooks/useSettings';
+import { useTranslation } from '@/core/hooks/useTranslation';
 import { SkipBack, SkipForward, SpeakerHigh, SpeakerSlash, Repeat, RepeatOnce, Pause, Play } from '@phosphor-icons/react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
@@ -26,6 +27,7 @@ export const AudioPlayer = ({ surahNumber, ayahNumber, onAyahChange }: AudioPlay
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const { settings } = useSettings();
+  const { t } = useTranslation();
 
   const { data: surahData } = useQuery({
     queryKey: ['surah', surahNumber, settings.translationId],
@@ -228,9 +230,7 @@ export const AudioPlayer = ({ surahNumber, ayahNumber, onAyahChange }: AudioPlay
               <span>{formatTime(duration)}</span>
             </div>
             <span>
-              {settings.language === 'ar'
-                ? `آية ${currentAyah} من ${totalAyahs}`
-                : `Verse ${currentAyah} of ${totalAyahs}`}
+              {t('audioVerseOfTotal', { current: currentAyah, total: totalAyahs })}
             </span>
           </div>
           <div
